@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react"
+import { CssBaseline, ThemeProvider } from "@mui/material"
+import { useDispatch, useSelector } from "react-redux"
+import { createTheme } from "@mui/material/styles"
+import { useMemo } from "react"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
+
+import { themeSettings } from "./theme"
+import Dashboard from "./scenes/dashboard"
+import Layout from "./scenes/layout"
+import { getDataFetch, getDataFailure } from "./stores/reducers/dummy"
 
 function App() {
+  const mode = useSelector((state) => state.theme.mode)
+  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode])
+  // const cats = useSelector((state) => state)
+  // const dispatch = useDispatch()
+
+  // useEffect(() => {
+  //   // dispatch(getDataFetch())
+  // }, [dispatch])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Routes>
+            <Route element={<Layout />}>
+              <Route path="/" element={<Navigate to="/dashboard" />} replace />
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Route>
+          </Routes>
+        </ThemeProvider>
+      </BrowserRouter>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
