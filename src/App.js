@@ -14,10 +14,10 @@ function App() {
   const mode = useSelector((state) => state.theme.mode)
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode])
   // const cats = useSelector((state) => state)
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
   // useEffect(() => {
-  //   // dispatch(getDataFetch())
+  // dispatch(getDataFetch())
   // }, [dispatch])
 
   return (
