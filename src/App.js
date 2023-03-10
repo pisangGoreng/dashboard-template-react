@@ -13,7 +13,6 @@ import { getDataFetch, getDataFailure } from "./stores/reducers/dummy"
 function App() {
   const mode = useSelector((state) => state.theme.mode)
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode])
-  // const cats = useSelector((state) => state)
   const dispatch = useDispatch()
 
   // useEffect(() => {
@@ -29,6 +28,7 @@ function App() {
             <Route element={<Layout />}>
               <Route path="/" element={<Navigate to="/dashboard" />} replace />
               <Route path="/dashboard" element={<Dashboard />} />
+              {/* add new route in here */}
             </Route>
           </Routes>
         </ThemeProvider>
